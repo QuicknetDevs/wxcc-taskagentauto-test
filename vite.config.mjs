@@ -5,23 +5,20 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   define: {
-    'process.env.NODE_ENV': '"production"',
+    "process.env.NODE_ENV": '"production"',
   },
   build: {
     lib: {
       entry: "src/main.tsx",
       name: "WxccTaskAgentAuto",
       fileName: () => "wxcc-taskagentauto.js",
-      formats: ["iife"], // produce un archivo usable directamente como <script>
+      formats: ["iife"],
     },
     rollupOptions: {
-      // 👇 NO excluir nada, así React y ReactDOM se incluyen en el bundle final
-      external: [],
+      external: [], // 👈 NADA externo, React debe ir dentro
       output: {
-        globals: {},
+        globals: {}, // 👈 vacío
       },
     },
-    outDir: "dist",
-    emptyOutDir: true,
   },
 });
